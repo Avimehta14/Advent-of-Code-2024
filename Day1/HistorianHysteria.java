@@ -27,6 +27,12 @@ public class HistorianHysteria {
         } catch (IOException e){
             System.err.println("Error reading the file" + e.getMessage());
         }
+
+        solvePart1(l1, l2);
+        solvePart2(l1, l2);
+    }
+
+    public static void solvePart1(List<Integer> l1, List<Integer> l2){
         Collections.sort(l1);
         Collections.sort(l2);
 
@@ -36,6 +42,23 @@ public class HistorianHysteria {
             dist = dist + abs( l1.get(n) - l2.get(n));
         }
         System.out.println(dist);
+    }
 
+    private static void solvePart2(List<Integer> l1, List<Integer> l2) {
+        Map<Integer, Integer> counts = new HashMap<>();
+
+        for(Integer num : l2){
+            counts.put(num, counts.getOrDefault(num,0)+1);
+        }
+
+        Integer sum = 0;
+
+        for(Integer num: l1){
+            if(counts.containsKey(num)){
+                sum = sum + (num * counts.get(num));
+            }
+        }
+
+        System.out.println(sum);
     }
 }
